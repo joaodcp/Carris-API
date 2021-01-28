@@ -42,7 +42,8 @@
         url: "swagger.json",
         requestInterceptor: req => {
           if(req.body && !req.headers["Accept"]) {
-            req.headers["Access-Control-Allow-Origin"] = "*"
+            req.headers["Host"] = "gateway.carris.pt",
+            req.headers["User-Agent"] = "Carris/43.0"
           }
         },
         dom_id: '#swagger-ui',
