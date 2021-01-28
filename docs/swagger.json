@@ -1,9 +1,9 @@
 {
   "openapi": "3.0.0",
   "info": {
-    "title": "XTranPassengerAPI 2.10",
-    "description": "Documentation of the XTranPassengerAPI 2.10 methods.",
-    "version": "2.10-oas3"
+    "title": "XTranPassengerAPI 2.9",
+    "description": "Documentation of the XTranPassengerAPI 2.9 methods.",
+    "version": "2.9-oas3"
   },
   "servers": [
     {
@@ -38,7 +38,7 @@
         }
       }
     },
-    "/xtranpassengerapi/api/v2.10/alerts": {
+    "/xtranpassengerapi/api/v2.9/alerts": {
       "get": {
         "tags": [
           "Alerts"
@@ -95,7 +95,7 @@
         ]
       }
     },
-    "/xtranpassengerapi/api/v2.10/busstops/routenumber/{routeNumber}/laststation/{lastStation}/startLat/{lat}/startLon/{lon}/numberbusstops/{nBusStops}": {
+    "/xtranpassengerapi/api/v2.9/busstops/routenumber/{routeNumber}/laststation/{lastStation}/startLat/{lat}/startLon/{lon}/numberbusstops/{nBusStops}": {
       "get": {
         "tags": [
           "BusStops"
@@ -212,7 +212,7 @@
         ]
       }
     },
-    "/xtranpassengerapi/api/v2.10/busstops": {
+    "/xtranpassengerapi/api/v2.9/busstops": {
       "get": {
         "tags": [
           "BusStops"
@@ -268,7 +268,7 @@
         ]
       }
     },
-    "/xtranpassengerapi/api/v2.10/busstops/timestamp/{timestamp}": {
+    "/xtranpassengerapi/api/v2.9/busstops/timestamp/{timestamp}": {
       "get": {
         "tags": [
           "BusStops"
@@ -337,7 +337,7 @@
         ]
       }
     },
-    "/xtranpassengerapi/api/v2.10/busstops/rvd/{rvdId}": {
+    "/xtranpassengerapi/api/v2.9/busstops/rvd/{rvdId}": {
       "get": {
         "tags": [
           "BusStops"
@@ -406,7 +406,7 @@
         ]
       }
     },
-    "/xtranpassengerapi/api/v2.10/busstops/near/lat/{lat}/lon/{lng}": {
+    "/xtranpassengerapi/api/v2.9/busstops/near/lat/{lat}/lon/{lng}": {
       "get": {
         "tags": [
           "BusStops"
@@ -488,7 +488,7 @@
         ]
       }
     },
-    "/xtranpassengerapi/api/v2.10/Estimations": {
+    "/xtranpassengerapi/api/v2.9/Estimations": {
       "get": {
         "tags": [
           "Estimations"
@@ -529,7 +529,7 @@
         ]
       }
     },
-    "/xtranpassengerapi/api/v2.10/Estimations/busStop/{busStop}/top/{results}": {
+    "/xtranpassengerapi/api/v2.9/Estimations/busStop/{busStop}/top/{results}": {
       "get": {
         "tags": [
           "Estimations"
@@ -609,7 +609,7 @@
         ]
       }
     },
-    "/xtranpassengerapi/api/v2.10/Estimations/estimationbusstop/{busStops}/top/{results}": {
+    "/xtranpassengerapi/api/v2.9/Estimations/estimationbusstop/{busStops}/top/{results}": {
       "get": {
         "tags": [
           "Estimations"
@@ -689,7 +689,7 @@
         ]
       }
     },
-    "/xtranpassengerapi/api/v2.10/Geocoding/{search}": {
+    "/xtranpassengerapi/api/v2.9/Geocoding/{search}": {
       "get": {
         "tags": [
           "Geocoding"
@@ -758,7 +758,7 @@
         ]
       }
     },
-    "/xtranpassengerapi/api/v2.10/Geocoding/reverse/lat/{lat}/lng/{lng}": {
+    "/xtranpassengerapi/api/v2.9/Geocoding/reverse/lat/{lat}/lng/{lng}": {
       "get": {
         "tags": [
           "Geocoding"
@@ -823,7 +823,7 @@
         ]
       }
     },
-    "/xtranpassengerapi/api/v2.10/Geocoding/suggest/{query}": {
+    "/xtranpassengerapi/api/v2.9/Geocoding/suggest/{query}": {
       "get": {
         "tags": [
           "Geocoding"
@@ -892,7 +892,7 @@
         ]
       }
     },
-    "/xtranpassengerapi/api/v2.10/Geocoding/fromId/{locationId}": {
+    "/xtranpassengerapi/api/v2.9/Geocoding/fromId/{locationId}": {
       "get": {
         "tags": [
           "Geocoding"
@@ -945,7 +945,7 @@
         ]
       }
     },
-    "/xtranpassengerapi/api/v2.10/GTFS/realtime/vehiclepositions": {
+    "/xtranpassengerapi/api/v2.9/GTFS/realtime/vehiclepositions": {
       "get": {
         "tags": [
           "Gtfs"
@@ -964,7 +964,7 @@
         ]
       }
     },
-    "/xtranpassengerapi/api/v2.10/GTFS": {
+    "/xtranpassengerapi/api/v2.9/GTFS": {
       "get": {
         "tags": [
           "Gtfs"
@@ -982,7 +982,7 @@
         ]
       }
     },
-    "/xtranpassengerapi/api/v2.10/GTFS/date/{date}": {
+    "/xtranpassengerapi/api/v2.9/GTFS/date/{date}": {
       "get": {
         "tags": [
           "Gtfs"
@@ -1014,7 +1014,7 @@
         ]
       }
     },
-    "/xtranpassengerapi/api/v2.10/Planner/startlat/{startLat}/startlon/{startLon}/endLat/{endLat}/endLon/{endLon}/start/{startDate}/language/{language}": {
+    "/xtranpassengerapi/api/v2.9/Planner/startlat/{startLat}/startlon/{startLon}/endLat/{endLat}/endLon/{endLon}/start/{startDate}/language/{language}": {
       "get": {
         "tags": [
           "Planner"
@@ -1137,7 +1137,7 @@
         ]
       }
     },
-    "/xtranpassengerapi/api/v2.10/Routes/busStop/{busStopId}": {
+    "/xtranpassengerapi/api/v2.9/Routes/busStop/{busStopId}": {
       "get": {
         "tags": [
           "Routes"
@@ -1207,7 +1207,7 @@
         ]
       }
     },
-    "/xtranpassengerapi/api/v2.10/Routes": {
+    "/xtranpassengerapi/api/v2.9/Routes": {
       "get": {
         "tags": [
           "Routes"
@@ -1263,7 +1263,7 @@
         ]
       }
     },
-    "/xtranpassengerapi/api/v2.10/Routes/timestamp/{timestamp}": {
+    "/xtranpassengerapi/api/v2.9/Routes/timestamp/{timestamp}": {
       "get": {
         "tags": [
           "Routes"
@@ -1332,7 +1332,7 @@
         ]
       }
     },
-    "/xtranpassengerapi/api/v2.10/Routes/{routeNumber}": {
+    "/xtranpassengerapi/api/v2.9/Routes/{routeNumber}": {
       "get": {
         "tags": [
           "Routes"
@@ -1385,7 +1385,7 @@
         ]
       }
     },
-    "/xtranpassengerapi/api/v2.10/Routes/{routeNumber}/from/{from}/until/{until}": {
+    "/xtranpassengerapi/api/v2.9/Routes/{routeNumber}/from/{from}/until/{until}": {
       "get": {
         "tags": [
           "Routes"
@@ -1462,7 +1462,7 @@
         ]
       }
     },
-    "/xtranpassengerapi/api/v2.10/SGO/busNumber/{busNumber}": {
+    "/xtranpassengerapi/api/v2.9/SGO/busNumber/{busNumber}": {
       "get": {
         "tags": [
           "SGO"
@@ -1515,7 +1515,7 @@
         ]
       }
     },
-    "/xtranpassengerapi/api/v2.10/StopTimes/routeNumber/{routeNumber}/direction/{direction}/stop/{stopId}/date/{date}": {
+    "/xtranpassengerapi/api/v2.9/StopTimes/routeNumber/{routeNumber}/direction/{direction}/stop/{stopId}/date/{date}": {
       "get": {
         "tags": [
           "StopTimes"
@@ -1601,7 +1601,7 @@
         ]
       }
     },
-    "/xtranpassengerapi/api/v2.10/vehicleStatuses/routeNumber/{routeNumber}": {
+    "/xtranpassengerapi/api/v2.9/vehicleStatuses/routeNumber/{routeNumber}": {
       "get": {
         "tags": [
           "VehicleStatuses"
@@ -1670,7 +1670,7 @@
         ]
       }
     },
-    "/xtranpassengerapi/api/v2.10/vehicleStatuses": {
+    "/xtranpassengerapi/api/v2.9/vehicleStatuses": {
       "get": {
         "tags": [
           "VehicleStatuses"
