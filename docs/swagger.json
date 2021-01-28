@@ -44,7 +44,7 @@
           "Alerts"
         ],
         "summary": "Returns of alerts for the public.",
-        "operationId": "Get",
+        "operationId": "GetAlerts",
         "responses": {
           "200": {
             "description": "Success",

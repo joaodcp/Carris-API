@@ -40,6 +40,11 @@
       // Begin Swagger UI call region
       const ui = SwaggerUIBundle({
         url: "swagger.json",
+        requestInterceptor: req => {
+          if(req.body && !req.headers["Content-Type"]) {
+            req.headers["Access-Control-Allow-Origin"] = "*"
+          }
+        },
         dom_id: '#swagger-ui',
         deepLinking: true,
         presets: [
