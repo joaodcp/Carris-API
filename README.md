@@ -8,9 +8,6 @@
 <h1>..::Autenticação::..</h1>
 <h3>Obter um authorizationToken inicial</h3>
 <h5>Fazer um POST request para o <a href="https://joaodcp.github.io/Carris-API/#/Authentication/GetBearerTokenJWT">endpoint de autorização</a>, com o corpo:</h5>
-```
-{
-  "token": "string",
-  "type": "string"
-}
+```shell
+npm install comboios
 ```
