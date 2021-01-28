@@ -41,8 +41,7 @@
       const ui = SwaggerUIBundle({
         url: "swagger.json",
         requestInterceptor: req => {
-            req.headers["Host"] = "gateway.carris.pt";
-            req.headers["User-Agent"] = "Carris/43.0";
+            req.headers["Origin"] = "gateway.carris.pt";
         },
         dom_id: '#swagger-ui',
         deepLinking: true,
