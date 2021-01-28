@@ -41,7 +41,7 @@
       const ui = SwaggerUIBundle({
         url: "swagger.json",
         requestInterceptor: req => {
-          if(req.body && !req.headers["Content-Type"]) {
+          if(req.body && !req.headers["Accept"]) {
             req.headers["Access-Control-Allow-Origin"] = "*"
           }
         },
