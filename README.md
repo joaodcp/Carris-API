@@ -3,7 +3,7 @@
   <br>
   Unofficial Carris API Documentation
 </h1>
-<h4 align="center">API privada da Carris, descrita de acordo com a norma OpenAPI 3.0.0 e Swagger.</h4>
+<h4 align="center">API privada da Carris, descrita de acordo com as normas OpenAPI 3.0.0 e Swagger.</h4>
 <h6 align="center">Esta API está protegida com autorização do tipo bearer JWT. Os tokens expiram a cada 15 minutos e devem ser atualizados com refresh.</h6>
 <p align="center"><a href="https://joaodcp.github.io/Carris-API/">Documentação Swagger/OpenAPI</a></p>
 <hr>
