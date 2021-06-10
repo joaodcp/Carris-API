@@ -35,7 +35,7 @@
 ```javascript
 {
 	"token": "string",    //o valor desta chave é token de app fornecido pela carris
-	"type": "string"    //o valor desta chave deverá "apikey" no primeiro request
+	"type": "string"    //o valor desta chave deverá ser "apikey" no primeiro request
 }
 ```
 <h3 id="auth-res">Resposta</h3>
