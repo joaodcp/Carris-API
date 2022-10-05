@@ -1,9 +1,9 @@
 {
-  "openapi": "3.0.0",
+  "openapi": "3.0.1",
   "info": {
-    "title": "XTranPassengerAPI 2.10",
-    "description": "Documentation of the XTranPassengerAPI 2.10 methods.",
-    "version": "2.10-oas3"
+    "title": "XTranPassengerAPI 2.11",
+    "description": "Documentation of the XTranPassengerAPI 2.11 methods.",
+    "version": "2.11"
   },
   "servers": [
     {
@@ -11,47 +11,18 @@
     }
   ],
   "paths": {
-    "/authenticationapi/authorization/sign": {
-      "post": {
-        "tags": [
-          "Authentication"
-        ],
-        "summary": "Returns tokens for authorization purposes.",
-        "operationId": "GetBearerTokenJWT",
-        "requestBody": {
-          "description": "Parameters to obtain or refresh authenticationToken.",
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/body"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "400": {
-            "description": "Bad Request - check POST request body."
-          }
-        }
-      }
-    },
-    "/xtranpassengerapi/api/v2.10/alerts": {
+    "/api/v2.11/alerts": {
       "get": {
         "tags": [
           "Alerts"
         ],
         "summary": "Returns of alerts for the public.",
-        "operationId": "GetAlerts",
         "responses": {
           "200": {
             "description": "Success",
             "content": {
               "text/plain": {
                 "schema": {
-                  "uniqueItems": false,
                   "type": "array",
                   "items": {
                     "$ref": "#/components/schemas/XtpApiDtos.TinyPassenger.AlertDto"
@@ -60,7 +31,6 @@
               },
               "text/html": {
                 "schema": {
-                  "uniqueItems": false,
                   "type": "array",
                   "items": {
                     "$ref": "#/components/schemas/XtpApiDtos.TinyPassenger.AlertDto"
@@ -69,7 +39,6 @@
               },
               "application/json": {
                 "schema": {
-                  "uniqueItems": false,
                   "type": "array",
                   "items": {
                     "$ref": "#/components/schemas/XtpApiDtos.TinyPassenger.AlertDto"
@@ -78,7 +47,6 @@
               },
               "text/json": {
                 "schema": {
-                  "uniqueItems": false,
                   "type": "array",
                   "items": {
                     "$ref": "#/components/schemas/XtpApiDtos.TinyPassenger.AlertDto"
@@ -87,21 +55,101 @@
               }
             }
           }
-        },
-        "security": [
-          {
-            "Authorization": []
-          }
-        ]
+        }
       }
     },
-    "/xtranpassengerapi/api/v2.10/busstops/routenumber/{routeNumber}/laststation/{lastStation}/startLat/{lat}/startLon/{lon}/numberbusstops/{nBusStops}": {
+    "/api/v2.11/auth": {
+      "post": {
+        "tags": [
+          "Auth"
+        ],
+        "summary": "Allows authentication to use API, with a valid key, and return a token if given key is valid",
+        "requestBody": {
+          "description": "A mandatory valid key to get a Role for api requests",
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/XTraNPassengerAPI.Auth.AuthTokenRequest"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/XTraNPassengerAPI.Auth.AuthTokenRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/XTraNPassengerAPI.Auth.AuthTokenRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/XTraNPassengerAPI.Auth.AuthTokenRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/v2.11/auth/Validate/{token}": {
+      "post": {
+        "tags": [
+          "Auth"
+        ],
+        "summary": "Validates a token given on the authentication process",
+        "parameters": [
+          {
+            "name": "token",
+            "in": "path",
+            "description": "token to validate",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "boolean"
+                }
+              },
+              "text/html": {
+                "schema": {
+                  "type": "boolean"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "boolean"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "boolean"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v2.11/busstops/routenumber/{routeNumber}/laststation/{lastStation}/startLat/{lat}/startLon/{lon}/numberbusstops/{nBusStops}": {
       "get": {
         "tags": [
           "BusStops"
         ],
         "summary": "Returns the list of stations for a specific route, given a specific number of parameters received from Google.",
-        "operationId": "GetStationsForStep",
         "parameters": [
           {
             "name": "routeNumber",
@@ -168,7 +216,6 @@
             "content": {
               "text/plain": {
                 "schema": {
-                  "uniqueItems": false,
                   "type": "array",
                   "items": {
                     "$ref": "#/components/schemas/XtpApiDtos.TinyPassenger.BusStopDto"
@@ -177,7 +224,6 @@
               },
               "text/html": {
                 "schema": {
-                  "uniqueItems": false,
                   "type": "array",
                   "items": {
                     "$ref": "#/components/schemas/XtpApiDtos.TinyPassenger.BusStopDto"
@@ -186,7 +232,6 @@
               },
               "application/json": {
                 "schema": {
-                  "uniqueItems": false,
                   "type": "array",
                   "items": {
                     "$ref": "#/components/schemas/XtpApiDtos.TinyPassenger.BusStopDto"
@@ -195,7 +240,6 @@
               },
               "text/json": {
                 "schema": {
-                  "uniqueItems": false,
                   "type": "array",
                   "items": {
                     "$ref": "#/components/schemas/XtpApiDtos.TinyPassenger.BusStopDto"
@@ -204,15 +248,10 @@
               }
             }
           }
-        },
-        "security": [
-          {
-            "Authorization": []
-          }
-        ]
+        }
       }
     },
-    "/xtranpassengerapi/api/v2.10/busstops": {
+    "/api/v2.11/busstops": {
       "get": {
         "tags": [
           "BusStops"
@@ -224,7 +263,6 @@
             "content": {
               "text/plain": {
                 "schema": {
-                  "uniqueItems": false,
                   "type": "array",
                   "items": {
                     "$ref": "#/components/schemas/XtpApiDtos.TinyPassenger.BusStopDto"
@@ -233,7 +271,6 @@
               },
               "text/html": {
                 "schema": {
-                  "uniqueItems": false,
                   "type": "array",
                   "items": {
                     "$ref": "#/components/schemas/XtpApiDtos.TinyPassenger.BusStopDto"
@@ -242,7 +279,6 @@
               },
               "application/json": {
                 "schema": {
-                  "uniqueItems": false,
                   "type": "array",
                   "items": {
                     "$ref": "#/components/schemas/XtpApiDtos.TinyPassenger.BusStopDto"
@@ -251,7 +287,6 @@
               },
               "text/json": {
                 "schema": {
-                  "uniqueItems": false,
                   "type": "array",
                   "items": {
                     "$ref": "#/components/schemas/XtpApiDtos.TinyPassenger.BusStopDto"
@@ -260,15 +295,10 @@
               }
             }
           }
-        },
-        "security": [
-          {
-            "Authorization": []
-          }
-        ]
+        }
       }
     },
-    "/xtranpassengerapi/api/v2.10/busstops/timestamp/{timestamp}": {
+    "/api/v2.11/busstops/timestamp/{timestamp}": {
       "get": {
         "tags": [
           "BusStops"
@@ -278,6 +308,7 @@
           {
             "name": "timestamp",
             "in": "path",
+            "description": "",
             "required": true,
             "style": "simple",
             "explode": false,
@@ -293,7 +324,6 @@
             "content": {
               "text/plain": {
                 "schema": {
-                  "uniqueItems": false,
                   "type": "array",
                   "items": {
                     "$ref": "#/components/schemas/XtpApiDtos.TinyPassenger.BusStopDto"
@@ -302,7 +332,6 @@
               },
               "text/html": {
                 "schema": {
-                  "uniqueItems": false,
                   "type": "array",
                   "items": {
                     "$ref": "#/components/schemas/XtpApiDtos.TinyPassenger.BusStopDto"
@@ -311,7 +340,6 @@
               },
               "application/json": {
                 "schema": {
-                  "uniqueItems": false,
                   "type": "array",
                   "items": {
                     "$ref": "#/components/schemas/XtpApiDtos.TinyPassenger.BusStopDto"
@@ -320,7 +348,6 @@
               },
               "text/json": {
                 "schema": {
-                  "uniqueItems": false,
                   "type": "array",
                   "items": {
                     "$ref": "#/components/schemas/XtpApiDtos.TinyPassenger.BusStopDto"
@@ -329,15 +356,10 @@
               }
             }
           }
-        },
-        "security": [
-          {
-            "Authorization": []
-          }
-        ]
+        }
       }
     },
-    "/xtranpassengerapi/api/v2.10/busstops/rvd/{rvdId}": {
+    "/api/v2.11/busstops/rvd/{rvdId}": {
       "get": {
         "tags": [
           "BusStops"
@@ -347,6 +369,7 @@
           {
             "name": "rvdId",
             "in": "path",
+            "description": "",
             "required": true,
             "style": "simple",
             "explode": false,
@@ -362,7 +385,6 @@
             "content": {
               "text/plain": {
                 "schema": {
-                  "uniqueItems": false,
                   "type": "array",
                   "items": {
                     "$ref": "#/components/schemas/XtpApiDtos.TinyPassenger.BusStopDto"
@@ -371,7 +393,6 @@
               },
               "text/html": {
                 "schema": {
-                  "uniqueItems": false,
                   "type": "array",
                   "items": {
                     "$ref": "#/components/schemas/XtpApiDtos.TinyPassenger.BusStopDto"
@@ -380,7 +401,6 @@
               },
               "application/json": {
                 "schema": {
-                  "uniqueItems": false,
                   "type": "array",
                   "items": {
                     "$ref": "#/components/schemas/XtpApiDtos.TinyPassenger.BusStopDto"
@@ -389,7 +409,6 @@
               },
               "text/json": {
                 "schema": {
-                  "uniqueItems": false,
                   "type": "array",
                   "items": {
                     "$ref": "#/components/schemas/XtpApiDtos.TinyPassenger.BusStopDto"
@@ -398,15 +417,10 @@
               }
             }
           }
-        },
-        "security": [
-          {
-            "Authorization": []
-          }
-        ]
+        }
       }
     },
-    "/xtranpassengerapi/api/v2.10/busstops/near/lat/{lat}/lon/{lng}": {
+    "/api/v2.11/busstops/near/lat/{lat}/lon/{lng}": {
       "get": {
         "tags": [
           "BusStops"
@@ -444,7 +458,6 @@
             "content": {
               "text/plain": {
                 "schema": {
-                  "uniqueItems": false,
                   "type": "array",
                   "items": {
                     "$ref": "#/components/schemas/XtpApiDtos.TinyPassenger.NearbyBusStopDto"
@@ -453,7 +466,6 @@
               },
               "text/html": {
                 "schema": {
-                  "uniqueItems": false,
                   "type": "array",
                   "items": {
                     "$ref": "#/components/schemas/XtpApiDtos.TinyPassenger.NearbyBusStopDto"
@@ -462,7 +474,6 @@
               },
               "application/json": {
                 "schema": {
-                  "uniqueItems": false,
                   "type": "array",
                   "items": {
                     "$ref": "#/components/schemas/XtpApiDtos.TinyPassenger.NearbyBusStopDto"
@@ -471,7 +482,6 @@
               },
               "text/json": {
                 "schema": {
-                  "uniqueItems": false,
                   "type": "array",
                   "items": {
                     "$ref": "#/components/schemas/XtpApiDtos.TinyPassenger.NearbyBusStopDto"
@@ -480,21 +490,15 @@
               }
             }
           }
-        },
-        "security": [
-          {
-            "Authorization": []
-          }
-        ]
+        }
       }
     },
-    "/xtranpassengerapi/api/v2.10/Estimations": {
+    "/api/v2.11/Estimations": {
       "get": {
         "tags": [
           "Estimations"
         ],
         "summary": "Checking if there's a valid connection to the time estimator",
-        "operationId": "Test",
         "responses": {
           "200": {
             "description": "Success",
@@ -521,25 +525,20 @@
               }
             }
           }
-        },
-        "security": [
-          {
-            "Authorization": []
-          }
-        ]
+        }
       }
     },
-    "/xtranpassengerapi/api/v2.10/Estimations/busStop/{busStop}/top/{results}": {
+    "/api/v2.11/Estimations/busStop/{busStop}/top/{results}": {
       "get": {
         "tags": [
           "Estimations"
         ],
         "summary": "Returns a list of estimations with maximum results for the next buses passing in the stop sent by parameter (public stop identifier).",
-        "operationId": "GetFromBusStops",
         "parameters": [
           {
             "name": "busStop",
             "in": "path",
+            "description": "",
             "required": true,
             "style": "simple",
             "explode": false,
@@ -550,6 +549,7 @@
           {
             "name": "results",
             "in": "path",
+            "description": "",
             "required": true,
             "style": "simple",
             "explode": false,
@@ -565,7 +565,6 @@
             "content": {
               "text/plain": {
                 "schema": {
-                  "uniqueItems": false,
                   "type": "array",
                   "items": {
                     "$ref": "#/components/schemas/XtpApiDtos.TimeEstimator.EstimationDto"
@@ -574,7 +573,6 @@
               },
               "text/html": {
                 "schema": {
-                  "uniqueItems": false,
                   "type": "array",
                   "items": {
                     "$ref": "#/components/schemas/XtpApiDtos.TimeEstimator.EstimationDto"
@@ -583,7 +581,6 @@
               },
               "application/json": {
                 "schema": {
-                  "uniqueItems": false,
                   "type": "array",
                   "items": {
                     "$ref": "#/components/schemas/XtpApiDtos.TimeEstimator.EstimationDto"
@@ -592,7 +589,6 @@
               },
               "text/json": {
                 "schema": {
-                  "uniqueItems": false,
                   "type": "array",
                   "items": {
                     "$ref": "#/components/schemas/XtpApiDtos.TimeEstimator.EstimationDto"
@@ -601,25 +597,20 @@
               }
             }
           }
-        },
-        "security": [
-          {
-            "Authorization": []
-          }
-        ]
+        }
       }
     },
-    "/xtranpassengerapi/api/v2.10/Estimations/estimationbusstop/{busStops}/top/{results}": {
+    "/api/v2.11/Estimations/estimationbusstop/{busStops}/top/{results}": {
       "get": {
         "tags": [
           "Estimations"
         ],
         "summary": "Returns a list of estimations for multiple stops in a single request. \r\nStops should be separated by the '-' character. The result returns data from the stops, each containing its list of estimates.",
-        "operationId": "GetEstimationBusStop",
         "parameters": [
           {
             "name": "busStops",
             "in": "path",
+            "description": "",
             "required": true,
             "style": "simple",
             "explode": false,
@@ -630,6 +621,7 @@
           {
             "name": "results",
             "in": "path",
+            "description": "",
             "required": true,
             "style": "simple",
             "explode": false,
@@ -645,7 +637,6 @@
             "content": {
               "text/plain": {
                 "schema": {
-                  "uniqueItems": false,
                   "type": "array",
                   "items": {
                     "$ref": "#/components/schemas/XtpApiDtos.TinyPassenger.EstimationBusStopDto"
@@ -654,7 +645,6 @@
               },
               "text/html": {
                 "schema": {
-                  "uniqueItems": false,
                   "type": "array",
                   "items": {
                     "$ref": "#/components/schemas/XtpApiDtos.TinyPassenger.EstimationBusStopDto"
@@ -663,7 +653,6 @@
               },
               "application/json": {
                 "schema": {
-                  "uniqueItems": false,
                   "type": "array",
                   "items": {
                     "$ref": "#/components/schemas/XtpApiDtos.TinyPassenger.EstimationBusStopDto"
@@ -672,7 +661,6 @@
               },
               "text/json": {
                 "schema": {
-                  "uniqueItems": false,
                   "type": "array",
                   "items": {
                     "$ref": "#/components/schemas/XtpApiDtos.TinyPassenger.EstimationBusStopDto"
@@ -681,25 +669,20 @@
               }
             }
           }
-        },
-        "security": [
-          {
-            "Authorization": []
-          }
-        ]
+        }
       }
     },
-    "/xtranpassengerapi/api/v2.10/Geocoding/{search}": {
+    "/api/v2.11/Geocoding/{search}": {
       "get": {
         "tags": [
           "Geocoding"
         ],
         "summary": "Returns a list of possible points matching the given address",
-        "operationId": "Forward",
         "parameters": [
           {
             "name": "search",
             "in": "path",
+            "description": "",
             "required": true,
             "style": "simple",
             "explode": false,
@@ -714,7 +697,6 @@
             "content": {
               "text/plain": {
                 "schema": {
-                  "uniqueItems": false,
                   "type": "array",
                   "items": {
                     "$ref": "#/components/schemas/XtpApiDtos.Geocoding.GeoResultDto"
@@ -723,7 +705,6 @@
               },
               "text/html": {
                 "schema": {
-                  "uniqueItems": false,
                   "type": "array",
                   "items": {
                     "$ref": "#/components/schemas/XtpApiDtos.Geocoding.GeoResultDto"
@@ -732,7 +713,6 @@
               },
               "application/json": {
                 "schema": {
-                  "uniqueItems": false,
                   "type": "array",
                   "items": {
                     "$ref": "#/components/schemas/XtpApiDtos.Geocoding.GeoResultDto"
@@ -741,7 +721,6 @@
               },
               "text/json": {
                 "schema": {
-                  "uniqueItems": false,
                   "type": "array",
                   "items": {
                     "$ref": "#/components/schemas/XtpApiDtos.Geocoding.GeoResultDto"
@@ -750,25 +729,20 @@
               }
             }
           }
-        },
-        "security": [
-          {
-            "Authorization": []
-          }
-        ]
+        }
       }
     },
-    "/xtranpassengerapi/api/v2.10/Geocoding/reverse/lat/{lat}/lng/{lng}": {
+    "/api/v2.11/Geocoding/reverse/lat/{lat}/lng/{lng}": {
       "get": {
         "tags": [
           "Geocoding"
         ],
         "summary": "Returns the address to the specified geographical point",
-        "operationId": "Reverse",
         "parameters": [
           {
             "name": "lat",
             "in": "path",
+            "description": "",
             "required": true,
             "style": "simple",
             "explode": false,
@@ -780,6 +754,7 @@
           {
             "name": "lng",
             "in": "path",
+            "description": "",
             "required": true,
             "style": "simple",
             "explode": false,
@@ -815,25 +790,20 @@
               }
             }
           }
-        },
-        "security": [
-          {
-            "Authorization": []
-          }
-        ]
+        }
       }
     },
-    "/xtranpassengerapi/api/v2.10/Geocoding/suggest/{query}": {
+    "/api/v2.11/Geocoding/suggest/{query}": {
       "get": {
         "tags": [
           "Geocoding"
         ],
         "summary": "Autocomplete for user inputs, so that it can search for an address",
-        "operationId": "Suggest",
         "parameters": [
           {
             "name": "query",
             "in": "path",
+            "description": "",
             "required": true,
             "style": "simple",
             "explode": false,
@@ -848,7 +818,6 @@
             "content": {
               "text/plain": {
                 "schema": {
-                  "uniqueItems": false,
                   "type": "array",
                   "items": {
                     "$ref": "#/components/schemas/XtpApiDtos.Geocoding.GeoSuggestionDto"
@@ -857,7 +826,6 @@
               },
               "text/html": {
                 "schema": {
-                  "uniqueItems": false,
                   "type": "array",
                   "items": {
                     "$ref": "#/components/schemas/XtpApiDtos.Geocoding.GeoSuggestionDto"
@@ -866,7 +834,6 @@
               },
               "application/json": {
                 "schema": {
-                  "uniqueItems": false,
                   "type": "array",
                   "items": {
                     "$ref": "#/components/schemas/XtpApiDtos.Geocoding.GeoSuggestionDto"
@@ -875,7 +842,6 @@
               },
               "text/json": {
                 "schema": {
-                  "uniqueItems": false,
                   "type": "array",
                   "items": {
                     "$ref": "#/components/schemas/XtpApiDtos.Geocoding.GeoSuggestionDto"
@@ -884,25 +850,20 @@
               }
             }
           }
-        },
-        "security": [
-          {
-            "Authorization": []
-          }
-        ]
+        }
       }
     },
-    "/xtranpassengerapi/api/v2.10/Geocoding/fromId/{locationId}": {
+    "/api/v2.11/Geocoding/fromId/{locationId}": {
       "get": {
         "tags": [
           "Geocoding"
         ],
         "summary": "Retrieve the address data from a user search",
-        "operationId": "FromId",
         "parameters": [
           {
             "name": "locationId",
             "in": "path",
+            "description": "",
             "required": true,
             "style": "simple",
             "explode": false,
@@ -937,34 +898,23 @@
               }
             }
           }
-        },
-        "security": [
-          {
-            "Authorization": []
-          }
-        ]
+        }
       }
     },
-    "/xtranpassengerapi/api/v2.10/GTFS/realtime/vehiclepositions": {
+    "/api/v2.11/GTFS/realtime/vehiclepositions": {
       "get": {
         "tags": [
           "Gtfs"
         ],
         "summary": "Returns the vehicle positions of the current GTFS realtime feed.",
-        "operationId": "GetRealTime",
         "responses": {
           "200": {
             "description": "Success"
           }
-        },
-        "security": [
-          {
-            "Authorization": []
-          }
-        ]
+        }
       }
     },
-    "/xtranpassengerapi/api/v2.10/GTFS": {
+    "/api/v2.11/GTFS": {
       "get": {
         "tags": [
           "Gtfs"
@@ -974,15 +924,10 @@
           "200": {
             "description": "Success"
           }
-        },
-        "security": [
-          {
-            "Authorization": []
-          }
-        ]
+        }
       }
     },
-    "/xtranpassengerapi/api/v2.10/GTFS/date/{date}": {
+    "/api/v2.11/GTFS/date/{date}": {
       "get": {
         "tags": [
           "Gtfs"
@@ -990,15 +935,25 @@
         "summary": "Returns a valid GTFS feed for a given date.",
         "parameters": [
           {
+            "name": "requestedDate",
+            "in": "query",
+            "description": "A date in the YYYY-MM-DD format. Example: 2019-07-02",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          },
+          {
             "name": "date",
             "in": "path",
-            "description": "A date in the YYYY-MM-DD format. Example: 2019-07-02",
             "required": true,
             "style": "simple",
             "explode": false,
             "schema": {
-              "type": "string",
-              "format": "date-time"
+              "type": "string"
             }
           }
         ],
@@ -1006,15 +961,10 @@
           "200": {
             "description": "Success"
           }
-        },
-        "security": [
-          {
-            "Authorization": []
-          }
-        ]
+        }
       }
     },
-    "/xtranpassengerapi/api/v2.10/Planner/startlat/{startLat}/startlon/{startLon}/endLat/{endLat}/endLon/{endLon}/start/{startDate}/language/{language}": {
+    "/api/v2.11/Planner/startlat/{startLat}/startlon/{startLon}/endLat/{endLat}/endLon/{endLon}/start/{startDate}/language/{language}": {
       "get": {
         "tags": [
           "Planner"
@@ -1024,6 +974,7 @@
           {
             "name": "startLat",
             "in": "path",
+            "description": "",
             "required": true,
             "style": "simple",
             "explode": false,
@@ -1035,6 +986,7 @@
           {
             "name": "startLon",
             "in": "path",
+            "description": "",
             "required": true,
             "style": "simple",
             "explode": false,
@@ -1046,6 +998,7 @@
           {
             "name": "endLat",
             "in": "path",
+            "description": "",
             "required": true,
             "style": "simple",
             "explode": false,
@@ -1057,6 +1010,7 @@
           {
             "name": "endLon",
             "in": "path",
+            "description": "",
             "required": true,
             "style": "simple",
             "explode": false,
@@ -1068,6 +1022,7 @@
           {
             "name": "startDate",
             "in": "path",
+            "description": "",
             "required": true,
             "style": "simple",
             "explode": false,
@@ -1079,6 +1034,7 @@
           {
             "name": "language",
             "in": "path",
+            "description": "",
             "required": true,
             "style": "simple",
             "explode": false,
@@ -1093,7 +1049,6 @@
             "content": {
               "text/plain": {
                 "schema": {
-                  "uniqueItems": false,
                   "type": "array",
                   "items": {
                     "$ref": "#/components/schemas/XtpApiDtos.Google.SolutionDto"
@@ -1102,7 +1057,6 @@
               },
               "text/html": {
                 "schema": {
-                  "uniqueItems": false,
                   "type": "array",
                   "items": {
                     "$ref": "#/components/schemas/XtpApiDtos.Google.SolutionDto"
@@ -1111,7 +1065,6 @@
               },
               "application/json": {
                 "schema": {
-                  "uniqueItems": false,
                   "type": "array",
                   "items": {
                     "$ref": "#/components/schemas/XtpApiDtos.Google.SolutionDto"
@@ -1120,7 +1073,6 @@
               },
               "text/json": {
                 "schema": {
-                  "uniqueItems": false,
                   "type": "array",
                   "items": {
                     "$ref": "#/components/schemas/XtpApiDtos.Google.SolutionDto"
@@ -1129,15 +1081,10 @@
               }
             }
           }
-        },
-        "security": [
-          {
-            "Authorization": []
-          }
-        ]
+        }
       }
     },
-    "/xtranpassengerapi/api/v2.10/Routes/busStop/{busStopId}": {
+    "/api/v2.11/Routes/busStop/{busStopId}": {
       "get": {
         "tags": [
           "Routes"
@@ -1163,7 +1110,6 @@
             "content": {
               "text/plain": {
                 "schema": {
-                  "uniqueItems": false,
                   "type": "array",
                   "items": {
                     "$ref": "#/components/schemas/XtpApiDtos.TinyPassenger.RouteDto"
@@ -1172,7 +1118,6 @@
               },
               "text/html": {
                 "schema": {
-                  "uniqueItems": false,
                   "type": "array",
                   "items": {
                     "$ref": "#/components/schemas/XtpApiDtos.TinyPassenger.RouteDto"
@@ -1181,7 +1126,6 @@
               },
               "application/json": {
                 "schema": {
-                  "uniqueItems": false,
                   "type": "array",
                   "items": {
                     "$ref": "#/components/schemas/XtpApiDtos.TinyPassenger.RouteDto"
@@ -1190,7 +1134,6 @@
               },
               "text/json": {
                 "schema": {
-                  "uniqueItems": false,
                   "type": "array",
                   "items": {
                     "$ref": "#/components/schemas/XtpApiDtos.TinyPassenger.RouteDto"
@@ -1199,15 +1142,10 @@
               }
             }
           }
-        },
-        "security": [
-          {
-            "Authorization": []
-          }
-        ]
+        }
       }
     },
-    "/xtranpassengerapi/api/v2.10/Routes": {
+    "/api/v2.11/Routes": {
       "get": {
         "tags": [
           "Routes"
@@ -1219,7 +1157,6 @@
             "content": {
               "text/plain": {
                 "schema": {
-                  "uniqueItems": false,
                   "type": "array",
                   "items": {
                     "$ref": "#/components/schemas/XtpApiDtos.TinyPassenger.RouteDto"
@@ -1228,7 +1165,6 @@
               },
               "text/html": {
                 "schema": {
-                  "uniqueItems": false,
                   "type": "array",
                   "items": {
                     "$ref": "#/components/schemas/XtpApiDtos.TinyPassenger.RouteDto"
@@ -1237,7 +1173,6 @@
               },
               "application/json": {
                 "schema": {
-                  "uniqueItems": false,
                   "type": "array",
                   "items": {
                     "$ref": "#/components/schemas/XtpApiDtos.TinyPassenger.RouteDto"
@@ -1246,7 +1181,6 @@
               },
               "text/json": {
                 "schema": {
-                  "uniqueItems": false,
                   "type": "array",
                   "items": {
                     "$ref": "#/components/schemas/XtpApiDtos.TinyPassenger.RouteDto"
@@ -1255,15 +1189,10 @@
               }
             }
           }
-        },
-        "security": [
-          {
-            "Authorization": []
-          }
-        ]
+        }
       }
     },
-    "/xtranpassengerapi/api/v2.10/Routes/timestamp/{timestamp}": {
+    "/api/v2.11/Routes/timestamp/{timestamp}": {
       "get": {
         "tags": [
           "Routes"
@@ -1273,6 +1202,7 @@
           {
             "name": "timestamp",
             "in": "path",
+            "description": "",
             "required": true,
             "style": "simple",
             "explode": false,
@@ -1288,7 +1218,6 @@
             "content": {
               "text/plain": {
                 "schema": {
-                  "uniqueItems": false,
                   "type": "array",
                   "items": {
                     "$ref": "#/components/schemas/XtpApiDtos.TinyPassenger.RouteDto"
@@ -1297,7 +1226,6 @@
               },
               "text/html": {
                 "schema": {
-                  "uniqueItems": false,
                   "type": "array",
                   "items": {
                     "$ref": "#/components/schemas/XtpApiDtos.TinyPassenger.RouteDto"
@@ -1306,7 +1234,6 @@
               },
               "application/json": {
                 "schema": {
-                  "uniqueItems": false,
                   "type": "array",
                   "items": {
                     "$ref": "#/components/schemas/XtpApiDtos.TinyPassenger.RouteDto"
@@ -1315,7 +1242,6 @@
               },
               "text/json": {
                 "schema": {
-                  "uniqueItems": false,
                   "type": "array",
                   "items": {
                     "$ref": "#/components/schemas/XtpApiDtos.TinyPassenger.RouteDto"
@@ -1324,25 +1250,20 @@
               }
             }
           }
-        },
-        "security": [
-          {
-            "Authorization": []
-          }
-        ]
+        }
       }
     },
-    "/xtranpassengerapi/api/v2.10/Routes/{routeNumber}": {
+    "/api/v2.11/Routes/{routeNumber}": {
       "get": {
         "tags": [
           "Routes"
         ],
         "summary": "Returns the route by its route number.",
-        "operationId": "GetAsync",
         "parameters": [
           {
             "name": "routeNumber",
             "in": "path",
+            "description": "",
             "required": true,
             "style": "simple",
             "explode": false,
@@ -1377,15 +1298,10 @@
               }
             }
           }
-        },
-        "security": [
-          {
-            "Authorization": []
-          }
-        ]
+        }
       }
     },
-    "/xtranpassengerapi/api/v2.10/Routes/{routeNumber}/from/{from}/until/{until}": {
+    "/api/v2.11/Routes/{routeNumber}/from/{from}/until/{until}": {
       "get": {
         "tags": [
           "Routes"
@@ -1454,15 +1370,10 @@
               }
             }
           }
-        },
-        "security": [
-          {
-            "Authorization": []
-          }
-        ]
+        }
       }
     },
-    "/xtranpassengerapi/api/v2.10/SGO/busNumber/{busNumber}": {
+    "/api/v2.11/SGO/busNumber/{busNumber}": {
       "get": {
         "tags": [
           "SGO"
@@ -1507,20 +1418,15 @@
               }
             }
           }
-        },
-        "security": [
-          {
-            "Authorization": []
-          }
-        ]
+        }
       }
     },
-    "/xtranpassengerapi/api/v2.10/StopTimes/routeNumber/{routeNumber}/direction/{direction}/stop/{stopId}/date/{date}": {
+    "/api/v2.11/StopTimes/routeNumber/{routeNumber}/direction/{direction}/stop/{stopId}/date/{date}": {
       "get": {
         "tags": [
           "StopTimes"
         ],
-        "summary": "Returns the list of stop times for a specific busstop, given a route number and its direction.",
+        "summary": "Returns the list of stop times for a specific busstop, given a route number and its direction, and a date.",
         "parameters": [
           {
             "name": "routeNumber",
@@ -1593,21 +1499,15 @@
               }
             }
           }
-        },
-        "security": [
-          {
-            "Authorization": []
-          }
-        ]
+        }
       }
     },
-    "/xtranpassengerapi/api/v2.10/vehicleStatuses/routeNumber/{routeNumber}": {
+    "/api/v2.11/vehicleStatuses/routeNumber/{routeNumber}": {
       "get": {
         "tags": [
           "VehicleStatuses"
         ],
         "summary": "Returns the list of vehicle status for a single route.",
-        "operationId": "GetVehiclesForRoute",
         "parameters": [
           {
             "name": "routeNumber",
@@ -1626,7 +1526,6 @@
             "content": {
               "text/plain": {
                 "schema": {
-                  "uniqueItems": false,
                   "type": "array",
                   "items": {
                     "$ref": "#/components/schemas/XtpApiDtos.TinyPassenger.VehicleStatusDto"
@@ -1635,7 +1534,6 @@
               },
               "text/html": {
                 "schema": {
-                  "uniqueItems": false,
                   "type": "array",
                   "items": {
                     "$ref": "#/components/schemas/XtpApiDtos.TinyPassenger.VehicleStatusDto"
@@ -1644,7 +1542,6 @@
               },
               "application/json": {
                 "schema": {
-                  "uniqueItems": false,
                   "type": "array",
                   "items": {
                     "$ref": "#/components/schemas/XtpApiDtos.TinyPassenger.VehicleStatusDto"
@@ -1653,7 +1550,6 @@
               },
               "text/json": {
                 "schema": {
-                  "uniqueItems": false,
                   "type": "array",
                   "items": {
                     "$ref": "#/components/schemas/XtpApiDtos.TinyPassenger.VehicleStatusDto"
@@ -1662,15 +1558,10 @@
               }
             }
           }
-        },
-        "security": [
-          {
-            "Authorization": []
-          }
-        ]
+        }
       }
     },
-    "/xtranpassengerapi/api/v2.10/vehicleStatuses": {
+    "/api/v2.11/vehicleStatuses": {
       "get": {
         "tags": [
           "VehicleStatuses"
@@ -1682,7 +1573,6 @@
             "content": {
               "text/plain": {
                 "schema": {
-                  "uniqueItems": false,
                   "type": "array",
                   "items": {
                     "$ref": "#/components/schemas/XtpApiDtos.TinyPassenger.VehicleStatusDto"
@@ -1691,7 +1581,6 @@
               },
               "text/html": {
                 "schema": {
-                  "uniqueItems": false,
                   "type": "array",
                   "items": {
                     "$ref": "#/components/schemas/XtpApiDtos.TinyPassenger.VehicleStatusDto"
@@ -1700,7 +1589,6 @@
               },
               "application/json": {
                 "schema": {
-                  "uniqueItems": false,
                   "type": "array",
                   "items": {
                     "$ref": "#/components/schemas/XtpApiDtos.TinyPassenger.VehicleStatusDto"
@@ -1709,7 +1597,6 @@
               },
               "text/json": {
                 "schema": {
-                  "uniqueItems": false,
                   "type": "array",
                   "items": {
                     "$ref": "#/components/schemas/XtpApiDtos.TinyPassenger.VehicleStatusDto"
@@ -1718,645 +1605,792 @@
               }
             }
           }
-        },
-        "security": [
-          {
-            "Authorization": []
-          }
-        ]
+        }
       }
     }
   },
   "components": {
     "schemas": {
-      "XtpApiDtos.TinyPassenger.AlertDto": {
+      "System.TimeSpan": {
         "type": "object",
         "properties": {
-          "id": {
+          "Ticks": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "Days": {
             "type": "integer",
             "format": "int32"
           },
-          "alertType": {
-            "type": "string",
-            "enum": [
-              "Informative",
-              "Ocurrence"
-            ]
-          },
-          "alertDescription": {
-            "type": "string"
-          },
-          "publishDate": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "expirationDate": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "routeNumber": {
-            "type": "string"
-          },
-          "busStopNumber": {
-            "type": "string"
-          }
-        }
-      },
-      "XtpApiDtos.TinyPassenger.BusStopDto": {
-        "type": "object",
-        "properties": {
-          "id": {
+          "Hours": {
             "type": "integer",
             "format": "int32"
           },
-          "name": {
-            "type": "string"
-          },
-          "publicId": {
-            "type": "string"
-          },
-          "lat": {
-            "type": "number",
-            "format": "double"
-          },
-          "lng": {
-            "type": "number",
-            "format": "double"
-          },
-          "isPublicVisible": {
-            "type": "boolean"
-          },
-          "timestamp": {
-            "type": "string",
-            "format": "date-time"
-          }
-        }
-      },
-      "XtpApiDtos.TinyPassenger.NearbyBusStopDto": {
-        "type": "object",
-        "properties": {
-          "distance": {
-            "type": "number",
-            "format": "double"
-          },
-          "id": {
+          "Milliseconds": {
             "type": "integer",
             "format": "int32"
           },
-          "name": {
-            "type": "string"
-          },
-          "publicId": {
-            "type": "string"
-          },
-          "lat": {
-            "type": "number",
-            "format": "double"
-          },
-          "lng": {
-            "type": "number",
-            "format": "double"
-          },
-          "isPublicVisible": {
-            "type": "boolean"
-          },
-          "timestamp": {
-            "type": "string",
-            "format": "date-time"
-          }
-        }
-      },
-      "XtpApiDtos.TimeEstimator.EstimationDto": {
-        "type": "object",
-        "properties": {
-          "routeNumber": {
-            "type": "string"
-          },
-          "routeName": {
-            "type": "string"
-          },
-          "destination": {
-            "type": "string"
-          },
-          "time": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "busNumber": {
-            "type": "string"
-          },
-          "plateNumber": {
-            "type": "string"
-          },
-          "voyageNumber": {
+          "Minutes": {
             "type": "integer",
             "format": "int32"
           },
-          "publicId": {
-            "type": "string"
-          }
-        }
-      },
-      "XtpApiDtos.TinyPassenger.EstimationBusStopDto": {
-        "type": "object",
-        "properties": {
-          "estimationList": {
-            "uniqueItems": false,
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/XtpApiDtos.TimeEstimator.EstimationDto"
-            }
-          },
-          "id": {
+          "Seconds": {
             "type": "integer",
             "format": "int32"
           },
-          "name": {
-            "type": "string"
-          },
-          "publicId": {
-            "type": "string"
-          },
-          "lat": {
+          "TotalDays": {
             "type": "number",
-            "format": "double"
+            "format": "double",
+            "readOnly": true
           },
-          "lng": {
+          "TotalHours": {
             "type": "number",
-            "format": "double"
+            "format": "double",
+            "readOnly": true
           },
-          "isPublicVisible": {
-            "type": "boolean"
+          "TotalMilliseconds": {
+            "type": "number",
+            "format": "double",
+            "readOnly": true
           },
-          "timestamp": {
-            "type": "string",
-            "format": "date-time"
+          "TotalMinutes": {
+            "type": "number",
+            "format": "double",
+            "readOnly": true
+          },
+          "TotalSeconds": {
+            "type": "number",
+            "format": "double",
+            "readOnly": true
           }
-        }
+        },
+        "additionalProperties": false
       },
       "XtpApiDtos.Geocoding.GeoResultDto": {
         "type": "object",
         "properties": {
-          "lat": {
+          "Lat": {
             "type": "number",
             "format": "double"
           },
-          "lng": {
+          "Lng": {
             "type": "number",
             "format": "double"
           },
-          "address": {
-            "type": "string"
+          "Address": {
+            "type": "string",
+            "nullable": true
           },
-          "header": {
-            "type": "string"
+          "Header": {
+            "type": "string",
+            "nullable": true
           },
-          "isLocalMatch": {
+          "IsLocalMatch": {
             "type": "boolean"
           }
-        }
+        },
+        "additionalProperties": false
       },
       "XtpApiDtos.Geocoding.GeoSuggestionDto": {
         "type": "object",
         "properties": {
-          "locationId": {
-            "type": "string"
+          "LocationId": {
+            "type": "string",
+            "nullable": true
           },
-          "address": {
-            "type": "string"
+          "Address": {
+            "type": "string",
+            "nullable": true
           },
-          "header": {
-            "type": "string"
+          "Header": {
+            "type": "string",
+            "nullable": true
           }
-        }
-      },
-      "XtpApiDtos.Google.SolutionDto": {
-        "type": "object",
-        "properties": {
-          "bounds": {
-            "$ref": "#/components/schemas/XtpApiDtos.Google.BoundsDto"
-          },
-          "leg": {
-            "$ref": "#/components/schemas/XtpApiDtos.Google.SolutionLegDto"
-          },
-          "fare": {
-            "type": "string"
-          }
-        }
-      },
-      "XtpApiDtos.Google.BoundsDto": {
-        "type": "object",
-        "properties": {
-          "location1": {
-            "$ref": "#/components/schemas/XtpApiDtos.Google.LocationDto"
-          },
-          "location2": {
-            "$ref": "#/components/schemas/XtpApiDtos.Google.LocationDto"
-          }
-        }
-      },
-      "XtpApiDtos.Google.SolutionLegDto": {
-        "type": "object",
-        "properties": {
-          "distance": {
-            "type": "string"
-          },
-          "duration": {
-            "type": "string"
-          },
-          "bigSteps": {
-            "uniqueItems": false,
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/XtpApiDtos.Google.BigStepDto"
-            }
-          }
-        }
-      },
-      "XtpApiDtos.Google.LocationDto": {
-        "type": "object",
-        "properties": {
-          "lat": {
-            "type": "number",
-            "format": "double"
-          },
-          "lng": {
-            "type": "number",
-            "format": "double"
-          }
-        }
+        },
+        "additionalProperties": false
       },
       "XtpApiDtos.Google.BigStepDto": {
         "type": "object",
         "properties": {
-          "fullInstructions": {
-            "type": "string"
+          "FullInstructions": {
+            "type": "string",
+            "nullable": true
           },
-          "htmlInstructions": {
-            "type": "string"
+          "HtmlInstructions": {
+            "type": "string",
+            "nullable": true
           },
-          "distance": {
-            "type": "string"
+          "Distance": {
+            "type": "string",
+            "nullable": true
           },
-          "duration": {
-            "type": "string"
+          "Duration": {
+            "type": "string",
+            "nullable": true
           },
-          "shortName": {
-            "type": "string"
+          "ShortName": {
+            "type": "string",
+            "nullable": true
           },
-          "fullName": {
-            "type": "string"
+          "FullName": {
+            "type": "string",
+            "nullable": true
           },
-          "points": {
-            "uniqueItems": false,
+          "Points": {
             "type": "array",
+            "nullable": true,
             "items": {
               "$ref": "#/components/schemas/XtpApiDtos.Google.LocationDto"
             }
           },
-          "innerSteps": {
-            "uniqueItems": false,
+          "InnerSteps": {
             "type": "array",
+            "nullable": true,
             "items": {
               "$ref": "#/components/schemas/XtpApiDtos.Google.InnerStepDto"
             }
           },
-          "travelMode": {
+          "TravelMode": {
+            "$ref": "#/components/schemas/XtpApiDtos.Google.TravelMode"
+          },
+          "Headsign": {
             "type": "string",
-            "enum": [
-              "Walking",
-              "Bus",
-              "Subway"
-            ]
+            "nullable": true
           },
-          "headsign": {
-            "type": "string"
-          },
-          "numberOfStops": {
+          "NumberOfStops": {
             "type": "integer",
             "format": "int32"
           },
-          "startLocation": {
+          "StartLocation": {
             "$ref": "#/components/schemas/XtpApiDtos.Google.LocationDto"
           }
-        }
+        },
+        "additionalProperties": false
+      },
+      "XtpApiDtos.Google.BoundsDto": {
+        "type": "object",
+        "properties": {
+          "Location1": {
+            "$ref": "#/components/schemas/XtpApiDtos.Google.LocationDto"
+          },
+          "Location2": {
+            "$ref": "#/components/schemas/XtpApiDtos.Google.LocationDto"
+          }
+        },
+        "additionalProperties": false
       },
       "XtpApiDtos.Google.InnerStepDto": {
         "type": "object",
         "properties": {
-          "fullInstructions": {
-            "type": "string"
+          "FullInstructions": {
+            "type": "string",
+            "nullable": true
           },
-          "htmlInstructions": {
-            "type": "string"
+          "HtmlInstructions": {
+            "type": "string",
+            "nullable": true
           },
-          "distance": {
-            "type": "string"
+          "Distance": {
+            "type": "string",
+            "nullable": true
           },
-          "duration": {
-            "type": "string"
+          "Duration": {
+            "type": "string",
+            "nullable": true
           }
-        }
+        },
+        "additionalProperties": false
       },
-      "XtpApiDtos.TinyPassenger.RouteDto": {
+      "XtpApiDtos.Google.LocationDto": {
         "type": "object",
         "properties": {
-          "id": {
+          "Lat": {
+            "type": "number",
+            "format": "double"
+          },
+          "Lng": {
+            "type": "number",
+            "format": "double"
+          }
+        },
+        "additionalProperties": false
+      },
+      "XtpApiDtos.Google.SolutionDto": {
+        "type": "object",
+        "properties": {
+          "Bounds": {
+            "$ref": "#/components/schemas/XtpApiDtos.Google.BoundsDto"
+          },
+          "Leg": {
+            "$ref": "#/components/schemas/XtpApiDtos.Google.SolutionLegDto"
+          },
+          "Fare": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "XtpApiDtos.Google.SolutionLegDto": {
+        "type": "object",
+        "properties": {
+          "Distance": {
+            "type": "string",
+            "nullable": true
+          },
+          "Duration": {
+            "type": "string",
+            "nullable": true
+          },
+          "BigSteps": {
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "$ref": "#/components/schemas/XtpApiDtos.Google.BigStepDto"
+            }
+          }
+        },
+        "additionalProperties": false
+      },
+      "XtpApiDtos.Google.TravelMode": {
+        "type": "integer",
+        "format": "int32",
+        "enum": [
+          0,
+          1,
+          2
+        ]
+      },
+      "XtpApiDtos.TimeEstimator.EstimationDto": {
+        "type": "object",
+        "properties": {
+          "RouteNumber": {
+            "type": "string",
+            "nullable": true
+          },
+          "RouteName": {
+            "type": "string",
+            "nullable": true
+          },
+          "Destination": {
+            "type": "string",
+            "nullable": true
+          },
+          "Time": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "BusNumber": {
+            "type": "string",
+            "nullable": true
+          },
+          "PlateNumber": {
+            "type": "string",
+            "nullable": true
+          },
+          "VoyageNumber": {
             "type": "integer",
             "format": "int32"
           },
-          "routeNumber": {
-            "type": "string"
+          "PublicId": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "XtpApiDtos.TinyPassenger.AlertDto": {
+        "type": "object",
+        "properties": {
+          "ID": {
+            "type": "integer",
+            "format": "int32"
           },
-          "name": {
-            "type": "string"
+          "AlertType": {
+            "$ref": "#/components/schemas/XtpApiDtos.TinyPassenger.AlertType"
           },
-          "isPublicVisible": {
+          "AlertDescription": {
+            "type": "string",
+            "nullable": true
+          },
+          "PublishDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "ExpirationDate": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "RouteNumber": {
+            "type": "string",
+            "nullable": true
+          },
+          "BusStopNumber": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "XtpApiDtos.TinyPassenger.AlertType": {
+        "type": "integer",
+        "format": "int32",
+        "enum": [
+          0,
+          1
+        ]
+      },
+      "XtpApiDtos.TinyPassenger.BusStopDto": {
+        "type": "object",
+        "properties": {
+          "ID": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "Name": {
+            "type": "string",
+            "nullable": true
+          },
+          "PublicId": {
+            "type": "string",
+            "nullable": true
+          },
+          "Lat": {
+            "type": "number",
+            "format": "double"
+          },
+          "Lng": {
+            "type": "number",
+            "format": "double"
+          },
+          "IsPublicVisible": {
             "type": "boolean"
           },
-          "timestamp": {
+          "Timestamp": {
             "type": "string",
             "format": "date-time"
           }
-        }
-      },
-      "XtpApiDtos.TinyPassenger.FullRouteDto": {
-        "type": "object",
-        "properties": {
-          "isCirc": {
-            "type": "boolean"
-          },
-          "variants": {
-            "uniqueItems": false,
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/XtpApiDtos.TinyPassenger.VariantDto"
-            }
-          },
-          "id": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "routeNumber": {
-            "type": "string"
-          },
-          "name": {
-            "type": "string"
-          },
-          "isPublicVisible": {
-            "type": "boolean"
-          },
-          "timestamp": {
-            "type": "string",
-            "format": "date-time"
-          }
-        }
-      },
-      "XtpApiDtos.TinyPassenger.VariantDto": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "variantNumber": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "isActive": {
-            "type": "boolean"
-          },
-          "upItinerary": {
-            "$ref": "#/components/schemas/XtpApiDtos.TinyPassenger.ItineraryDto"
-          },
-          "downItinerary": {
-            "$ref": "#/components/schemas/XtpApiDtos.TinyPassenger.ItineraryDto"
-          },
-          "circItinerary": {
-            "$ref": "#/components/schemas/XtpApiDtos.TinyPassenger.ItineraryDto"
-          }
-        }
-      },
-      "XtpApiDtos.TinyPassenger.ItineraryDto": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "type": {
-            "type": "string",
-            "enum": [
-              "Asc",
-              "Desc",
-              "Circ"
-            ]
-          },
-          "connections": {
-            "uniqueItems": false,
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/XtpApiDtos.TinyPassenger.ConnectionDto"
-            }
-          },
-          "shape": {
-            "type": "string"
-          }
-        }
+        },
+        "additionalProperties": false
       },
       "XtpApiDtos.TinyPassenger.ConnectionDto": {
         "type": "object",
         "properties": {
-          "id": {
+          "ID": {
             "type": "integer",
             "format": "int32"
           },
-          "distance": {
+          "Distance": {
             "type": "number",
             "format": "float"
           },
-          "orderNum": {
+          "OrderNum": {
             "type": "integer",
             "format": "int32"
           },
-          "busStop": {
+          "BusStop": {
             "$ref": "#/components/schemas/XtpApiDtos.TinyPassenger.BusStopDto"
           }
-        }
+        },
+        "additionalProperties": false
       },
-      "XtpApiDtos.TinyPassenger.SGOVehicleStatusDto": {
+      "XtpApiDtos.TinyPassenger.EstimationBusStopDto": {
         "type": "object",
         "properties": {
-          "vehiclePlate": {
-            "type": "string"
-          },
-          "routeNumber": {
-            "type": "string"
-          },
-          "plateNumber": {
-            "type": "string"
-          },
-          "direction": {
-            "type": "string"
-          },
-          "lastStopOnVoyageId": {
+          "ID": {
             "type": "integer",
             "format": "int32"
           },
-          "lastStopOnVoyageName": {
-            "type": "string"
+          "Name": {
+            "type": "string",
+            "nullable": true
           },
-          "parkingStopId": {
-            "type": "integer",
-            "format": "int32"
+          "PublicId": {
+            "type": "string",
+            "nullable": true
           },
-          "parkingStopName": {
-            "type": "string"
-          },
-          "driverNumber": {
-            "type": "string"
-          },
-          "lat": {
+          "Lat": {
             "type": "number",
             "format": "double"
           },
-          "lng": {
+          "Lng": {
+            "type": "number",
+            "format": "double"
+          },
+          "IsPublicVisible": {
+            "type": "boolean"
+          },
+          "Timestamp": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "EstimationList": {
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "$ref": "#/components/schemas/XtpApiDtos.TimeEstimator.EstimationDto"
+            }
+          }
+        },
+        "additionalProperties": false
+      },
+      "XtpApiDtos.TinyPassenger.FullRouteDto": {
+        "type": "object",
+        "properties": {
+          "ID": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "RouteNumber": {
+            "type": "string",
+            "nullable": true
+          },
+          "Name": {
+            "type": "string",
+            "nullable": true
+          },
+          "IsPublicVisible": {
+            "type": "boolean"
+          },
+          "Timestamp": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "IsCirc": {
+            "type": "boolean"
+          },
+          "Variants": {
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "$ref": "#/components/schemas/XtpApiDtos.TinyPassenger.VariantDto"
+            }
+          }
+        },
+        "additionalProperties": false
+      },
+      "XtpApiDtos.TinyPassenger.ItineraryDto": {
+        "type": "object",
+        "properties": {
+          "ID": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "Type": {
+            "$ref": "#/components/schemas/XtpApiDtos.TinyPassenger.ItineraryType"
+          },
+          "Connections": {
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "$ref": "#/components/schemas/XtpApiDtos.TinyPassenger.ConnectionDto"
+            }
+          },
+          "Shape": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "XtpApiDtos.TinyPassenger.ItineraryType": {
+        "type": "integer",
+        "format": "int32",
+        "enum": [
+          0,
+          1,
+          2
+        ]
+      },
+      "XtpApiDtos.TinyPassenger.NearbyBusStopDto": {
+        "type": "object",
+        "properties": {
+          "ID": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "Name": {
+            "type": "string",
+            "nullable": true
+          },
+          "PublicId": {
+            "type": "string",
+            "nullable": true
+          },
+          "Lat": {
+            "type": "number",
+            "format": "double"
+          },
+          "Lng": {
+            "type": "number",
+            "format": "double"
+          },
+          "IsPublicVisible": {
+            "type": "boolean"
+          },
+          "Timestamp": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "Distance": {
             "type": "number",
             "format": "double"
           }
-        }
+        },
+        "additionalProperties": false
+      },
+      "XtpApiDtos.TinyPassenger.RouteDto": {
+        "type": "object",
+        "properties": {
+          "ID": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "RouteNumber": {
+            "type": "string",
+            "nullable": true
+          },
+          "Name": {
+            "type": "string",
+            "nullable": true
+          },
+          "IsPublicVisible": {
+            "type": "boolean"
+          },
+          "Timestamp": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "additionalProperties": false
       },
       "XtpApiDtos.TinyPassenger.ScheduleDto": {
         "type": "object",
         "properties": {
-          "dayId": {
+          "DayId": {
             "type": "integer",
             "format": "int32"
           },
-          "seasonId": {
+          "SeasonId": {
             "type": "integer",
             "format": "int32"
           },
-          "dayName": {
-            "type": "string"
+          "DayName": {
+            "type": "string",
+            "nullable": true
           },
-          "seasonName": {
-            "type": "string"
+          "SeasonName": {
+            "type": "string",
+            "nullable": true
           },
-          "stopTimes": {
-            "uniqueItems": false,
+          "StopTimes": {
             "type": "array",
+            "nullable": true,
             "items": {
               "$ref": "#/components/schemas/XtpApiDtos.TinyPassenger.StopTimeDto"
             }
           }
-        }
+        },
+        "additionalProperties": false
+      },
+      "XtpApiDtos.TinyPassenger.SGOVehicleStatusDto": {
+        "type": "object",
+        "properties": {
+          "VehiclePlate": {
+            "type": "string",
+            "nullable": true
+          },
+          "RouteNumber": {
+            "type": "string",
+            "nullable": true
+          },
+          "PlateNumber": {
+            "type": "string",
+            "nullable": true
+          },
+          "Direction": {
+            "type": "string",
+            "nullable": true
+          },
+          "LastStopOnVoyageId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "LastStopOnVoyageName": {
+            "type": "string",
+            "nullable": true
+          },
+          "ParkingStopId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "ParkingStopName": {
+            "type": "string",
+            "nullable": true
+          },
+          "DriverNumber": {
+            "type": "string",
+            "nullable": true
+          },
+          "Lat": {
+            "type": "number",
+            "format": "double"
+          },
+          "Lng": {
+            "type": "number",
+            "format": "double"
+          }
+        },
+        "additionalProperties": false
       },
       "XtpApiDtos.TinyPassenger.StopTimeDto": {
         "type": "object",
         "properties": {
-          "stopId": {
+          "StopId": {
             "type": "integer",
             "format": "int32"
           },
-          "routeNumber": {
-            "type": "string"
+          "RouteNumber": {
+            "type": "string",
+            "nullable": true
           },
-          "direction": {
-            "type": "string"
+          "Direction": {
+            "type": "string",
+            "nullable": true
           },
-          "time": {
-            "type": "string"
+          "Time": {
+            "$ref": "#/components/schemas/System.TimeSpan"
           }
-        }
+        },
+        "additionalProperties": false
+      },
+      "XtpApiDtos.TinyPassenger.VariantDto": {
+        "type": "object",
+        "properties": {
+          "ID": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "VariantNumber": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "IsActive": {
+            "type": "boolean"
+          },
+          "UpItinerary": {
+            "$ref": "#/components/schemas/XtpApiDtos.TinyPassenger.ItineraryDto"
+          },
+          "DownItinerary": {
+            "$ref": "#/components/schemas/XtpApiDtos.TinyPassenger.ItineraryDto"
+          },
+          "CircItinerary": {
+            "$ref": "#/components/schemas/XtpApiDtos.TinyPassenger.ItineraryDto"
+          }
+        },
+        "additionalProperties": false
+      },
+      "XtpApiDtos.TinyPassenger.VehicleState": {
+        "type": "integer",
+        "format": "int32",
+        "enum": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ]
       },
       "XtpApiDtos.TinyPassenger.VehicleStatusDto": {
         "type": "object",
         "properties": {
-          "busNumber": {
+          "BusNumber": {
             "type": "integer",
             "format": "int32"
           },
-          "state": {
-            "type": "string",
-            "enum": [
-              "On",
-              "Off",
-              "Standby",
-              "BetweenVoyages",
-              "InVoyage",
-              "Undefined",
-              "Unknown"
-            ]
+          "State": {
+            "$ref": "#/components/schemas/XtpApiDtos.TinyPassenger.VehicleState"
           },
-          "lastGpsTime": {
+          "LastGpsTime": {
             "type": "string",
-            "format": "date-time"
+            "format": "date-time",
+            "nullable": true
           },
-          "lastReportTime": {
+          "LastReportTime": {
             "type": "string",
-            "format": "date-time"
+            "format": "date-time",
+            "nullable": true
           },
-          "lat": {
+          "Lat": {
             "type": "number",
             "format": "double"
           },
-          "lng": {
+          "Lng": {
             "type": "number",
             "format": "double"
           },
-          "routeNumber": {
-            "type": "string"
-          },
-          "direction": {
-            "type": "string"
-          },
-          "plateNumber": {
-            "type": "string"
-          },
-          "timeStamp": {
+          "RouteNumber": {
             "type": "string",
-            "format": "date-time"
+            "nullable": true
           },
-          "dataServico": {
+          "VariantNumber": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "VoyageNumber": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "Direction": {
             "type": "string",
-            "format": "date-time"
+            "nullable": true
           },
-          "previousReportTime": {
+          "PlateNumber": {
             "type": "string",
-            "format": "date-time"
+            "nullable": true
           },
-          "previousLatitude": {
+          "TimeStamp": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "DataServico": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "PreviousReportTime": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "PreviousLatitude": {
             "type": "number",
-            "format": "double"
+            "format": "double",
+            "nullable": true
           },
-          "previousLongitude": {
+          "PreviousLongitude": {
             "type": "number",
-            "format": "double"
+            "format": "double",
+            "nullable": true
           }
-        }
+        },
+        "additionalProperties": false
       },
-      "body": {
-        "required": [
-          "token",
-          "type"
-        ],
+      "XTraNPassengerAPI.Auth.AuthTokenRequest": {
         "type": "object",
         "properties": {
           "token": {
-            "type": "string"
-          },
-          "type": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           }
-        }
-      }
-    },
-    "securitySchemes": {
-      "Authorization": {
-        "type": "http",
-        "scheme": "bearer",
-        "bearerFormat": "JWT"
+        },
+        "additionalProperties": false
       }
     }
   }
