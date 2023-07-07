@@ -6,8 +6,6 @@
 <h4 align="center">API privada da Carris, descrita de acordo com as normas OpenAPI 3.0.0 e Swagger.</h4>
 <h6 align="center">Esta API está protegida com autorização do tipo bearer JWT. Os tokens expiram a cada 15 minutos e devem ser atualizados com refresh.</h6>
 <p align="center"><a href="https://joaodcp.github.io/Carris-API/">Documentação Swagger/OpenAPI</a></p>
-<p align="center">OU</p>
-<p align="center">https://gateway.carris.pt/gateway/gtfs/index.html (OFICIAL)</p>
 <hr>
 <h3 align="center">A CARRIS também disponibiliza dados publicamente nos formatos GTFS e GTFS-RT através do seu portal do programador (https://gateway.carris.pt/apiui/#!/)</h3>
 <hr>
